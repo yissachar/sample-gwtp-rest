@@ -1,0 +1,83 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://myapp.appspot.com/_ah/api",
+  "name" : "messageapi",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://myapp.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "messageapi.messageApi.listFaveItems" : {
+      "path" : "faveitem",
+      "httpMethod" : "GET",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.fave100.samples.gwtprest.server.MessageApi.listFaveItems",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "FaveItem" : {
+        "id" : "FaveItem",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "song" : {
+            "type" : "string"
+          },
+          "artist" : {
+            "type" : "string"
+          },
+          "whyline" : {
+            "type" : "string"
+          }
+        }
+      },
+      "FaveItemCollection" : {
+        "id" : "FaveItemCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "FaveItem"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.fave100.samples.gwtprest.server.MessageApi.listFaveItems" : {
+        "response" : {
+          "$ref" : "FaveItemCollection"
+        }
+      }
+    }
+  }
+}
